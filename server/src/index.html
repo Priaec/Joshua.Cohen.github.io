@@ -1,0 +1,807 @@
+<html>
+<!--Head-->
+<head>
+    <!--Joshua Cohen COMP 484 LAB 2-->
+        <meta charset="ASCII">
+    <!--CSS-->    
+    <style>
+
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'sans-serif';
+        }
+
+        body{
+            background-color: rgb(30, 30, 30);
+            margin: 0%;
+        }
+
+        #title{
+            margin: 3%;
+        }
+
+        #main{
+            background-color: rgb(65, 65, 65);
+            display: flex;
+            flex-direction: row;
+            padding: 2%;
+            width: 100%;
+            height:auto;
+        }   
+
+        @keyframes animate{
+            0%{
+                color: red;
+            }
+            50%{
+                color: green;
+            }
+            100%{
+                color: blue;
+            }
+        }
+
+        #center-page{
+            background-color: transparent;
+        }
+
+        form{
+            background-color: rgb(40,40,40);
+            border-radius: 50px;
+            border-color: rgb(0, 211, 162);
+            border-style: solid;
+            padding: 20px;
+            transition: padding 1s;
+        }
+
+        h1{
+            color: rgb(0, 211, 162);
+        }
+
+
+
+        .form{
+            margin: 5px;
+            width: 100%;
+            display: table;
+        }
+
+        .form.label{
+            color: rgb(0, 211, 162);
+            font-family: sans-serif;
+        }
+
+            .form.item{
+                display: flex;
+                flex-direction: column;
+                margin-left: 0%;
+            }
+
+            /*Every Element that is inside of the item will get this css*/
+            .form.item * {
+                align-self: flex-start;
+            }
+
+            .form.input{
+                width: 70%;
+                max-width: 425px;
+                border-radius: 20px;
+                border-color: rgb(0, 211, 162);
+                width: max-content;
+                height: max-content;
+                min-height: 40px;
+                font-family: sans-serif;
+                background-color: transparent;
+            }
+
+            .form.input:hover{
+                background-color: rgb(0, 211, 162);
+                border-color: rgb(30, 30, 30);
+            }
+
+            .form.input#hours-work-Error{
+                background-color: aliceblue;
+            }
+
+            .form.input::placeholder{
+                color: white;
+            }
+/*
+            .form.input#first-name{
+                background-color: transparent;
+            }
+
+            .form.input#last-name{
+                background-color: transparent;
+            }
+
+            .form.input#id{
+                background-color: transparent;
+            }
+*/
+            .form.input#description{
+                width: 400px;
+                height: 150px;
+                /*background-color: transparent;*/
+            }
+
+        .explain-txt{
+            font-size: 0.5em;
+            margin-top: 1%;
+            opacity: 60%;
+        }
+
+        #result{
+            display: flex;
+            justify-self: center;
+            text-align: center;
+            font-size: large;
+            border-radius: 10%;
+            background-color: rgb(6, 214, 160);
+            /*background-color: rgb(255, 255, 255);*/
+            width: 80%;
+        }
+
+        .buttonsRow{
+            display: flex;
+            justify-content: center;
+        }
+
+        .button{
+            border-radius: 50px;
+            display: block;
+            width: 100px;
+            height: 50px;
+            padding: 10px;
+            margin: 2px;
+            font-family: sans-serif;
+            font-size: large;
+            background-color:rgb(0, 163, 109);
+            color: black;
+        }
+
+            #submitButton{
+                display: block;
+                background-color: rgb(30, 30, 30);
+                color: white;
+                border-color: white;
+                transition: transform 0.2s;
+            }
+
+            #submitButton:hover{
+                transform: translateX(10px);
+            }
+        
+
+            .button#saveButton{
+                display: inline;
+                float: right;
+                background-color: rgb(80, 80, 80);
+            }
+        
+            #errorMsg-Container{
+                margin: 5%;
+                margin-left: 7%;
+                color: red;
+                display: block;
+            }
+
+            h3{
+                display: inline-block;
+                size: 40px;
+            }
+
+            .header{
+                width: 100%;
+                height: 100vh;
+                background-image: url(images/profile.JPG);
+                background-position: center;
+                background-size: cover;
+            }
+
+            nav{
+                width: 100%;
+                padding: 0px;
+                text-align: center;
+                font-size: larger;
+            }
+
+            .logo{
+                width: 150px;
+                margin: 20px 0;
+                cursor: pointer;            
+            }
+
+            nav ul{
+                background: #000;
+                width: 100%;
+                margin-top: 0px;
+            }
+
+            #contact{
+                border-style: solid;
+                border-width: 1px;
+                border-color: rgb(66, 66, 66);
+                border-radius: 20px;
+                background-color: rgb(0, 163, 109);
+                color: #000;
+                padding: 7px;
+            }
+
+            nav ul li:hover{
+                color:  rgb(0, 211, 162);
+                transform: translateY(5px);
+            }
+
+            #contact:hover{
+                background-color: #fff;
+                transform: translateY(0px);
+            }
+
+            nav ul li{
+                display: inline-block;
+                list-style: none;
+                margin: 20px 30px;
+                color: #fff;
+                border-color: white;
+                border-radius: 1px;
+                transition: transform 0.2s;
+            }
+
+            .text{
+                padding: 20px 8%;
+                font-size: 2em;
+                color: rgb(0, 211, 162);
+            }
+
+            #planeIcon{
+                width: 100px;
+                height: 100px;
+            }
+
+            nav.sticky{
+                position: fixed;
+                top: 0;
+                left: 0;
+                padding: 10px 8%;
+                background: #000;
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                transition: padding 1s;
+                height: auto;
+            }
+
+            nav.sticky ul{
+                width: auto;
+            }
+ </style>
+
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Sofia">
+
+
+</head>
+
+    <!--Body-->
+    <body id="body">
+        <div class="header">
+            <nav id="navbar">
+                <img src="images/planeIcon2.jpg" id="planeIcon" class="logo" onmouseover="planeAnimation()">
+                <ul id="menu">
+                    <li>
+                        <h3 id="J" onmouseover="elementHoverAnimation('J')">J</h3>
+                        <h3 id="O" onmouseover="elementHoverAnimation('O')">O</h3>
+                        <h3 id="S" onmouseover="elementHoverAnimation('S')">S</h3>
+                        <h3 id="H" onmouseover="elementHoverAnimation('H')">H</h3>
+                        <h3 id="U" onmouseover="elementHoverAnimation('U')">U</h3>
+                        <h3 id="A" onmouseover="elementHoverAnimation('A')">A</h3>
+                    </li>
+                    <li>HOME</li>
+                    <li>INFO</li>
+                    <li>ABOUT</li>
+                    <li>PROJECTS</li>
+                    <li id="contact">CONTACT</li>
+                </ul>
+            </nav>
+        </div>
+        <p class="text">Lorem, ipsum dolor sit amet consectetur adipisicing elit.
+             Soluta recusandae consequuntur et asperiores eius laborum
+              voluptas minima nihil magni cum itaque modi laudantium libero
+               quas assumenda, harum temporibus nemo quia.
+        </p>
+        <!--Main Page-->
+       <!-- <div id="main">-->
+            <!--Center Page Division-->
+            <div id="center-page" style="float: left;">
+                <!--Title Header-->
+                <title>Login Form</title>
+                <h1 id="Title">Login Form</h1>
+                <!--Form-->
+                <form class="form">
+                    <!--First Name Form Entry-->
+                    <div class="form item">
+                        <label class="form label" for="first-name">First Name</label>
+                        <input type="text" class=" form input" name="first-name" id="first-name" placeholder="Type your first name">
+                    </div>      
+                    <!--Last Name Form Entry-->
+                    <div class="form item">
+                        <label class="form label" for="last-name">Last Name</label>
+                        <input type="text" class="form input" name="last-name" id="last-name" placeholder="Type your last name">
+                    </div>    
+                    <!--ID Form Entry-->
+                    <div class="form item">
+                        <label class="form label" for="id">Student ID</label>
+                        <input type="number" class="form input" name="id" id="id" placeholder="Type your student ID number">
+                    </div>    
+                    <!--Description Form Entry-->
+                    <div class="form item">
+                        <label class="form label" for="description">Description</label>
+                        <input type="text" class="form input" name="description" id="description" placeholder="Type a general description about yourself">
+                    </div>   
+                </form action="preventDefault()">
+               
+                <!--Submit and save button-->
+                <div id="form-buttons">
+                    <button input type="submit" class="button" id="submitButton" onclick="buttonAnimation(); cancelsubmit(event);">
+                        Submit
+                    </button>
+                </div> 
+                <!--Error message container-->
+                <span id="errorMsg-Container">
+                    <p id="hours-work-Error"></p>
+                    <p id="first-name-Error"></p>
+                    <p id="last-name-Error"></p>
+                    <p id="id-Error"></p>
+                    <p id="description-Error"></p>
+                </span>
+            </div>
+       <!-- </div> -->
+<!--JavaScript-->
+<script defer>
+    //define variables
+        //first value 
+        let x = 0;
+        //second value
+        let y = 0;
+        //operator type
+        let operator = "";
+        //value to check if thw calculator has completed a calculation
+        let completedCalculation = false;
+        //value to check which button type the user last pushed, i.e. operator, number, clear, compute, etc...
+        let prevButtonPressed = 'operator';
+        //value to check the last user typed input value (gives exact string) i.e. 20, twenty, 6 , 6e5, 24h, etc...
+        let userInputValue = 0;
+        //value to represent if user has saved a value
+        let userSavedValue = "";
+
+    let form = document.getElementsByClassName('form');
+    let submitButton = document.getElementById('submitButton');
+    let planePos = 0;
+        
+        let navbar = document.getElementById('navbar');
+        let menu = document.getElementById('menu');
+
+        window.onscroll = ()=>{
+            if(window.pageYOffset >= menu.offsetTop)
+                navbar.classList.add('sticky');
+            else
+                navbar.classList.remove('sticky');
+        }
+
+        let planeFlying = false;
+        let plane = document.getElementById('planeIcon');
+        plane.sty
+        //animation to make plane fly
+        function planeAnimation(){
+            if(planeFlying)
+                return;
+
+            planeFlying = true;
+            let frameIndex = 0;
+            let speed = 0;
+            let margin = -30;
+            clearTimeout(id);
+            id = setInterval(frame, 10);
+            let marginLeft = 0;
+            function frame(){
+               if(frameIndex >= 91){
+                    clearInterval(id);
+                    planeFlying = false;
+                    return;
+                }
+
+                plane.style.transform = 'rotate(' + (planePos % 360)+ 'deg)';
+                planePos += 1;
+                frameIndex++;
+            }
+        }
+
+        function elementHoverAnimation(item){
+            let element = document.getElementById(item);
+            let id = null;
+            let frameIndex = 0;
+            let ySpeed = 0;
+            let r = Math.floor(Math.random()*255);
+            let g = Math.floor(Math.random()*255);
+            let b = Math.floor(Math.random()*255);
+            let pos = element.style.marginTop;
+            clearTimeout(id);
+            id = setInterval(frame, 10);
+            function frame(){
+               if(frameIndex == 40){
+                    clearInterval(id);
+                    element.style.color = "rgb("+255+","+255+","+255+")";
+                    return;
+                }
+                pos = ySpeed;
+                ySpeed -= 0.2;
+                if(frameIndex >= 20){
+                    pos = ySpeed;
+                    ySpeed += 0.2;
+                }
+                frameIndex++;
+                element.style.color = "rgb("+r+","+g+","+b+")";
+                //console.log("rgb("+r+","+g+","+b+")")
+                element.style.marginTop = (pos* ySpeed )+ 'px';
+            }
+        }
+
+
+        //form cannot process, we need to use prevent default to not submit anything
+        function cancelsubmit(event){
+            event.preventDefault();
+        }
+
+        function setVisibleInline(element, value){
+            if(value)
+                element.style.display = 'inline';
+            else
+                element.style.display = 'none';
+        }
+
+        function contact(){
+
+        }
+
+        //checks if the first character in the string is capitalized
+        function checkCapitalInitial(str){
+            if(str.length <= 0)
+                return false;
+            const chars = str.split('');
+            if(chars[0] == chars[0].toUpperCase())
+                return true;
+            else
+                return false;
+        }
+
+        //function to check if input contains only numbers
+        function containsOnlyNumbers(input){
+            if(/^\d+$/.test(input))
+                return true;
+            else
+                return false;
+        }
+
+        //function to check if input contains only letters
+        function containsOnlyLetters(input) {
+            if(/^[a-zA-z]+$/.test(input))
+               return true; 
+            else
+                return false;
+        }
+
+        //function used to test if a text field exceeds a certain number of words
+        function exceedsMaxLength(str, max){
+            const words = str.split(' ');
+            console.log(words.length > 25);
+            if(words.length > 25)
+                return true;
+            return false;
+        }
+
+        //clears message off of the screen
+        function displayMsg(msg){
+            let msgObject = document.getElementById(msg.getName());
+            msgObject.innerHTML = msg.getMsg();
+        }
+
+        //shows message on screen
+        function clearMsg(msg){
+            let msgObject = document.getElementById(msg.getName());
+            msgObject.innerHTML = "";
+        }
+
+        //each error message will be organized as an error object, for simplicity
+        class errMsg{
+            name;
+            msg;
+            value;
+
+            constructor(name, msg){
+                this.name = name;
+                this.msg = msg;
+                this.value = false;
+            }
+            getName(){return this.name;}
+            getMsg(){return this.msg;}
+            getValue(){return this.value;}
+            setValue(value){this.value = value;}
+        }
+
+        //function validates all input fields and verifies that each input field is of correct specifications
+        function formSubmission(){
+            const firstName = document.getElementById('first-name');
+            const lastName = document.getElementById('last-name');
+            const id = document.getElementById('id');
+            const description = document.getElementById('description');
+            let errMsgContainer = document.getElementById('errorMsg-Container');
+            let result = document.getElementById('result');
+            /*List of class objects of type errMsg(String name,String msg,String value)*/
+            let errMsgss = [new errMsg('first-name-Error','Error! First letter of first name must be capitalized...also must contain letters only!'),
+                            new errMsg('last-name-Error','Error! First letter of last name must be capitalized...also must contain letters only!'),
+                            new errMsg('id-Error','Error! ID must be at least 9 digits long!'),
+                            new errMsg('description-Error','Error! Description must not exceed 25 words and must not be empty!'),
+                            new errMsg('hours-work-Error','The value you entered is not a real number!')];
+            //first clear all error messages before checking fields again            
+            errMsgss.forEach(msg => {
+                clearMsg(msg);
+            });
+            //first check first name
+            if(!checkCapitalInitial(firstName.value) || !containsOnlyLetters(firstName.value)){
+                errMsgContainer.style.display = 'inline';
+                errMsgContainer.add
+                displayMsg(errMsgss[0]);
+                errMsgss[0].setValue(true);
+            }
+            //second check last name 
+                //must have first letter capital and must only contain letters
+            if(!checkCapitalInitial(lastName.value) || !containsOnlyLetters(lastName.value)){
+                errMsgContainer.style.display = 'inline';
+                displayMsg(errMsgss[1]);
+                errMsgss[1].setValue(true);
+            }
+            //third check id
+            if(id.value.toString().length < 9){
+                errMsgContainer.style.display = 'inline';
+                displayMsg(errMsgss[2]);
+                errMsgss[2].setValue(true);
+            }
+            //fourth check description
+            const exceedsLength = exceedsMaxLength(description.value, 25);
+            if(exceedsLength || description.value == ""){
+                errMsgContainer.style.display = 'inline';
+                displayMsg(errMsgss[3])
+                errMsgss[3].setValue(true);
+            }
+            //check if there is an errMsg that has been switched on
+            errMsgss.forEach((msg)=>{
+                if(msg.getValue())
+                    displayMsg(msg);
+            });
+            //if we have not hit any errors, we will show GUI pop up
+            let page = document.getElementById('main');
+            const errExists = errMsgss.find(msg=>{
+                if(msg.getValue())
+                    return true;
+            });
+            console.log('errExists: ' + errExists);
+            if(!errExists){
+                errMsgss.forEach(msg => {
+                        clearMsg(msg);
+                });
+                page.style.backgroundColor = "antiquewhite";
+                setTimeout(()=>{
+                    submitAlert(firstName.value, lastName.value, id.value, description.value);
+                },100);
+            }
+            else
+                page.style.backgroundColor = "yellow";
+        }
+        
+        //function generateds alert on the window, if form is submitted
+        function submitAlert(arg1, arg2, arg3, arg4){
+            if((arg1 == null) || (arg2 == null) || (arg3.toString == null) || (arg4 == null))
+                return;   
+                //display GUI MSG
+            const result = document.getElementById("result");
+            
+            window.alert(
+                         "First Name: " + arg1 + "\n"
+             +           "Last Name: " + arg2 + "\n"
+             +           "Student ID: " + arg3.toString() + "\n"
+             +           "Description: " + arg4 + "\n"
+             +           "Calculator Result: " + userSavedValue
+            );
+        }
+
+
+        //function saves the result to the hoursWorkedThisWeek SPAN
+        function saveValue(){
+            let hoursLog = document.getElementById("hoursWorkedThisWeek");
+            console.log(result.value)
+            err = new errMsg('hours-work-Error','The value you entered is not a real number');
+            let msg = document.getElementById(err.name);
+            if(isNaN(result.value) || result.value == ""){
+                //display the error to the user
+                displayMsg(err);
+                hoursLog.innerHTML = "Hours worked this week: " + userSavedValue; 
+                //hoursLog.innerHTML = "Hours worked this week: " + result.value; 
+                return false;
+            }
+            clearMsg(err);
+            //we know this value is valid, we can keep going
+            hoursLog.innerHTML = "Hours worked this week: " + result.value; 
+            userSavedValue = result.value;
+            return true;
+        }
+
+        //function will reset calculator
+        function resetCalculator(){
+            console.log("resetting values...");
+            result.value = "";
+            x = 0 || "";
+            y = 0 || "";
+            operator = "";
+            userInputValue = 0;
+            completedCalculation = false;
+        }
+
+        //function will reset after complete calculation, i.e. 2 + 4 = 6, resetAfterComputation(),... + 2 = 8
+        function resetAfterComputation(){
+            result.value = x;
+            y = 0;
+            prevButtonPressed = 'operator';
+            completedCalculation = true;
+        }
+
+        //function checks if the user inputs a text in the result field.
+            // Must have no letters and no characters other than numbers
+        function validInputValue(){
+            if (!containsOnlyNumbers(userInputValue)){
+               //check if its an operator
+               const operators = ['+','-','*','/'];
+               for(let i = 0; i < operators.length; i++){
+                    if(userInputValue == operators[i])
+                        return true;
+               }
+               //not a number and not an operator
+               return false;
+            }
+            //is a valid number
+            return true;
+        }
+
+        //function to see variables inside console
+        function logVariables(){
+            console.log("{\n  x: " + x);
+            console.log("  y: " + y);
+            console.log("  operator: " + operator);
+            console.log("  previousButton: " + prevButtonPressed + "\n}");         
+        }
+        
+        //button listener for buttons and change of result field
+        function useCalculator(buttonValue, buttonPressed){
+            let result = document.getElementById("result");
+            switch(buttonPressed){
+                //if user types in the result field
+                case 'input' || 'Input':                  //if user input text
+                    result = document.getElementById("result");
+                    userInputValue = result.value;
+                    //if the input is an operator
+                    switch (buttonValue){
+                        case '+':
+                            operator = '+';
+                            break;
+                        case '-':
+                            operator = '-';
+                            break;
+                        case '*':
+                            operator = '*';
+                            break;
+                        case '/':
+                            operator = '/';
+                            break;
+
+                        default:
+                            break;
+                    }
+                    if(buttonValue <= 0 || isNaN(buttonValue))
+                        break;
+                    if(operator == ""){
+                        x = buttonValue;
+                        result.value = x;
+                    }
+                    else{
+                        y = buttonValue;
+                        result.value = y;
+                    }   
+                    logVariables();
+                    break;
+                //if the user presses one of the number buttons
+                case 'number' || 'Number':  
+                    //a number button was pressed
+                    if(!validInputValue()){
+                        result.value = "ERROR: press C";
+                        break;
+                    }
+                    if(operator == ""){
+                       if(prevButtonPressed == "number"){
+                            x = x.toString() + buttonValue.toString();
+                            prevButtonPressed = "number"
+                        }
+                        else{                          //else if the previous button pressed is not a number
+                            x = buttonValue;
+                            prevButtonPressed = "number";
+                        }
+                        result.value = x;
+                    }
+                    else{                       //if the operator has been pressed, we know to modify the new value
+                        if(prevButtonPressed == "number"){
+                            y = y.toString() + buttonValue.toString();
+                             prevButtonPressed = "number";
+                        }
+                        else{
+                            y = buttonValue;
+                            prevButtonPressed = "number";
+                        }
+                        result.value = y;
+                    }
+                    break;
+                //if user pushes 'C' button
+                case 'clear' || 'Clear':
+                    resetCalculator();
+                    break;
+                //if user pushed '+','-','*','/'
+                case 'operator' || 'Operator':
+                    if(!validInputValue()){
+                        result.value = "ERROR: press C";
+                        break;
+                    }
+                    operator = buttonValue;
+                    prevButtonPressed = 'operator';
+                    //might not need this line below
+                    //result.value = buttonValue;
+                    break;
+                //if user pushes '='
+                case 'compute' || 'Compute':
+                    if(!validInputValue()){
+                        result.value = "ERROR: press C";
+                        break;
+                    }
+                    x = parseInt(x);
+                    y = parseInt(y);
+                    switch(operator){
+                        case '+':
+                            x += y;
+                            resetAfterComputation();
+                            console.log("result: " + result.value);
+                            break;
+                        case '-':
+                            x -= y;
+                            resetAfterComputation();
+                            break;
+                        case '*':
+                            x *= y;
+                            resetAfterComputation();
+                            break;
+                        case '/':
+                            x /= y;
+                            resetAfterComputation();
+                            break;
+                        default:
+                            message = "No Selected Operator"
+                            result.value = message;
+                            console.log("No Selected Operator");
+                            prevButtonPressed = 'operator';
+                            break;
+                    }
+                    logVariables();
+                    break;
+            }
+        }
+    </script>
+
+    </body>    
+</html>
