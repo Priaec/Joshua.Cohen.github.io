@@ -4,7 +4,7 @@ const router = express.Router();
 const url = require('url');
 const path = require('path');
 const querystring = require('querystring');
-const User = require('../models/contactForm');
+//const User = require('../models/contactForm');
 const { isModuleNamespaceObject } = require('util/types');
 const { ifError } = require('assert');
 const contactForm = require('../models/contactForm');
@@ -58,6 +58,21 @@ router.post('/form', async (req,res)=>{
         //user gave us bad data
         res.status(400).json({message: err.message});
     }
+});
+
+//cronned job to let me know if any new forms have been submitted
+router.get('/newRecords', (req,res)=>{
+    //get the number of records
+    const records = db.collection('Personal');
+    const currRecordCount = 0;
+    records.count().then((count)=>{
+        currRecordCount = count;
+    });
+    //compare the number of records now vs the number of records the last time this method was invoked
+
+    //the difference is the amount of new records
+
+    //send an email to me with the amount of new records that have been inserted
 });
 
 module.exports = router;
