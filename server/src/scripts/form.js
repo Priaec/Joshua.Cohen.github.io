@@ -79,6 +79,14 @@
                 return false;
         }
 
+        //function to check if this is a correct email
+        function isValidEmail(email){
+            if(/^[a-zA-Z0-9.]+ @ + [a-zA-Z0-9] + . + [a-zA-Z0-9]$/.test(email))
+                return true;
+            else
+                return false;
+        }
+
         //function used to test if a text field exceeds a certain number of words
         function exceedsMaxLength(str, max){
             const words = str.split(' ');
@@ -88,13 +96,13 @@
             return false;
         }
 
-        //clears message off of the screen
+        //shows message on screen
         function displayMsg(msg){
             let msgObject = document.getElementById(msg.getName());
             msgObject.innerHTML = msg.getMsg();
         }
 
-        //shows message on screen
+        //clears message off of the screen
         function clearMsg(msg){
             let msgObject = document.getElementById(msg.getName());
             msgObject.innerHTML = "";
@@ -121,16 +129,54 @@
         function formSubmission(){
             const firstName = document.getElementById('first-name');
             const lastName = document.getElementById('last-name');
-            const id = document.getElementById('id');
+            const email = document.getElementById('email');
             const description = document.getElementById('description');
             let errMsgContainer = document.getElementById('errorMsg-Container');
-            let result = document.getElementById('result');
+            
+            
+            
+            //check values client side first
+
+            
+            //url we are fetching
+            const url = 'http://localhost:3000/personal/form'
+            //body of the request
+            const body = {
+                firstName: firstName.value,
+                lastName: lastName.value,
+                emailAddress: email.value,
+                description: description.value,
+            }
+
+            //we need to fetch the server endpoint
+            fetch(url,{
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(body)
+            })
+            .then((response)=> response.json())
+            .then((responseJson)=>{
+                //our response will be the responseJson object
+                console.log(responseJson);
+            })
+            .catch((err)=>{
+                console.log(err);
+            })
+            
+            
+            
+            
+            
             /*List of class objects of type errMsg(String name,String msg,String value)*/
             let errMsgss = [new errMsg('first-name-Error','Error! First letter of first name must be capitalized...also must contain letters only!'),
                             new errMsg('last-name-Error','Error! First letter of last name must be capitalized...also must contain letters only!'),
-                            new errMsg('id-Error','Error! ID must be at least 9 digits long!'),
+                            new errMsg('email-Error','Error! email is not valid!'),
                             new errMsg('description-Error','Error! Description must not exceed 25 words and must not be empty!'),
                             new errMsg('hours-work-Error','The value you entered is not a real number!')];
+            
             //first clear all error messages before checking fields again            
             errMsgss.forEach(msg => {
                 clearMsg(msg);
@@ -138,7 +184,8 @@
             //first check first name
             if(!checkCapitalInitial(firstName.value) || !containsOnlyLetters(firstName.value)){
                 errMsgContainer.style.display = 'inline';
-                errMsgContainer.add
+                
+                //errMsgContainer.add
                 displayMsg(errMsgss[0]);
                 errMsgss[0].setValue(true);
             }
@@ -149,8 +196,8 @@
                 displayMsg(errMsgss[1]);
                 errMsgss[1].setValue(true);
             }
-            //third check id
-            if(id.value.toString().length < 9){
+            //third check email
+            if(isValidEmail(email.value)){
                 errMsgContainer.style.display = 'inline';
                 displayMsg(errMsgss[2]);
                 errMsgss[2].setValue(true);
@@ -178,61 +225,5 @@
                 errMsgss.forEach(msg => {
                         clearMsg(msg);
                 });
-                page.style.backgroundColor = "antiquewhite";
-                setTimeout(()=>{
-                    submitAlert(firstName.value, lastName.value, id.value, description.value);
-                },100);
             }
-            else
-                page.style.backgroundColor = "yellow";
         }
-        
-        //function generateds alert on the window, if form is submitted
-        function submitAlert(arg1, arg2, arg3, arg4){
-            if((arg1 == null) || (arg2 == null) || (arg3.toString == null) || (arg4 == null))
-                return;   
-                //display GUI MSG
-            const result = document.getElementById("result");
-        }
-
-
-        //function saves the result to the hoursWorkedThisWeek SPAN
-        function saveValue(){
-            let hoursLog = document.getElementById("hoursWorkedThisWeek");
-            console.log(result.value)
-            err = new errMsg('hours-work-Error','The value you entered is not a real number');
-            let msg = document.getElementById(err.name);
-            if(isNaN(result.value) || result.value == ""){
-                //display the error to the user
-                displayMsg(err);
-                hoursLog.innerHTML = "Hours worked this week: " + userSavedValue; 
-                //hoursLog.innerHTML = "Hours worked this week: " + result.value; 
-                return false;
-            }
-            clearMsg(err);
-            //we know this value is valid, we can keep going
-            hoursLog.innerHTML = "Hours worked this week: " + result.value; 
-            userSavedValue = result.value;
-            return true;
-        }
-
-        //function checks if the user inputs a text in the result field.
-            // Must have no letters and no characters other than numbers
-        function validInputValue(){
-            if (!containsOnlyNumbers(userInputValue)){
-               //check if its an operator
-               const operators = ['+','-','*','/'];
-               for(let i = 0; i < operators.length; i++){
-                    if(userInputValue == operators[i])
-                        return true;
-               }
-               //not a number and not an operator
-               return false;
-            }
-            //is a valid number
-            return true;
-        }
-
-
-        
-       

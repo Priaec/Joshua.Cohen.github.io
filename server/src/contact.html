@@ -38,29 +38,29 @@
             <form class="form">
                 <!--First Name Form Entry-->
                 <div class="form item">
-                    <label class="form label" for="first-name">First Name</label>
+                    <label class="form label" for="first-name">First Name *</label>
                     <input type="text" class=" form input" name="first-name" id="first-name" placeholder="Type your first name">
                 </div>      
                 <!--Last Name Form Entry-->
                 <div class="form item">
-                    <label class="form label" for="last-name">Last Name</label>
+                    <label class="form label" for="last-name">Last Name *</label>
                     <input type="text" class="form input" name="last-name" id="last-name" placeholder="Type your last name">
                 </div>    
                 <!--ID Form Entry-->
                 <div class="form item">
-                    <label class="form label" for="id">Student ID</label>
-                    <input type="number" class="form input" name="id" id="id" placeholder="Type your student ID number">
+                    <label class="form label" for="email">Email Address *</label>
+                    <input type="email" class="form input" name="email" id="email" placeholder="Email Address">
                 </div>    
                 <!--Description Form Entry-->
                 <div class="form item">
-                    <label class="form label" for="description">Description</label>
+                    <label class="form label" for="description">Description *</label>
                     <input type="text" class="form input" name="description" id="description" placeholder="Type a general description about yourself">
                 </div>   
             </form action="preventDefault()">
            
             <!--Submit and save button-->
             <div id="form-buttons">
-                <button input type="submit" class="button" id="submitButton" onclick="buttonAnimation(); cancelsubmit(event);">
+                <button input type="submit" class="button" id="submitButton" onclick="formSubmission();">
                     Submit
                 </button>
             </div> 
@@ -69,19 +69,11 @@
                 <p id="hours-work-Error"></p>
                 <p id="first-name-Error"></p>
                 <p id="last-name-Error"></p>
-                <p id="id-Error"></p>
+                <p id="email-Error"></p>
                 <p id="description-Error"></p>
             </span>
         </div>
 
     </div>
-
-
-    <script>
-        function home(){
-            window.location.href = 'http://localhost:3000/personal/index.html'
-        }
-        
-    </script>
 </body>
 </html>

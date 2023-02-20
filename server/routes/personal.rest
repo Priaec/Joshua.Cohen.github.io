@@ -1,1 +1,13 @@
 GET http://localhost:3000/personal/index.html
+
+###
+
+POST http://localhost:3000/personal/form
+Content-Type: application/json
+
+{
+    "firstName": "Joshua",
+    "lastName": "Cohen",
+    "emailAddress": "joshcohen8020@gmail.com",
+    "description": "Hello There"
+}
