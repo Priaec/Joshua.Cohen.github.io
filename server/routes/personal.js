@@ -20,4 +20,12 @@ router.get('/', (req,res)=>{
 });
 
 
+
+
+
+router.get('/projects', (req,res)=>{
+    res.sendFile(__dirname + '/projects.html')
+});
+
+
 module.exports = router;

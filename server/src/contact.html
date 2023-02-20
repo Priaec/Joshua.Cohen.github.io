@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Me!</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <script src="scripts/form.js"></script>
+    <script src="scripts/routes.js"></script>
+
+    
+</head>
+<body>
+    <div class="header">
+        <nav id="navbar">
+            <ul id="menu">
+                <li>
+                    <h3 id="J" >J</h3>
+                    <h3 id="O" >O</h3>
+                    <h3 id="S" >S</h3>
+                    <h3 id="H" >H</h3>
+                    <h3 id="U" >U</h3>
+                    <h3 id="A" >A</h3>
+                </li>
+                <li onclick="home()">HOME</li>
+                <li onclick="info()">INFO</li>
+                <li onclick="about()">ABOUT</li>
+                <li onclick="projects()">PROJECTS</li>
+                <li onclick='contact()' id="contact">CONTACT</li>
+            </ul>
+        </nav>
+        <h1 id="title">Contact</h1>
+        <!--Center Page Division-->
+        <div id="center-page" style="float: left;">
+            <!--Title Header-->
+            <!--Form-->
+            <form class="form">
+                <!--First Name Form Entry-->
+                <div class="form item">
+                    <label class="form label" for="first-name">First Name</label>
+                    <input type="text" class=" form input" name="first-name" id="first-name" placeholder="Type your first name">
+                </div>      
+                <!--Last Name Form Entry-->
+                <div class="form item">
+                    <label class="form label" for="last-name">Last Name</label>
+                    <input type="text" class="form input" name="last-name" id="last-name" placeholder="Type your last name">
+                </div>    
+                <!--ID Form Entry-->
+                <div class="form item">
+                    <label class="form label" for="id">Student ID</label>
+                    <input type="number" class="form input" name="id" id="id" placeholder="Type your student ID number">
+                </div>    
+                <!--Description Form Entry-->
+                <div class="form item">
+                    <label class="form label" for="description">Description</label>
+                    <input type="text" class="form input" name="description" id="description" placeholder="Type a general description about yourself">
+                </div>   
+            </form action="preventDefault()">
+           
+            <!--Submit and save button-->
+            <div id="form-buttons">
+                <button input type="submit" class="button" id="submitButton" onclick="buttonAnimation(); cancelsubmit(event);">
+                    Submit
+                </button>
+            </div> 
+            <!--Error message container-->
+            <span id="errorMsg-Container">
+                <p id="hours-work-Error"></p>
+                <p id="first-name-Error"></p>
+                <p id="last-name-Error"></p>
+                <p id="id-Error"></p>
+                <p id="description-Error"></p>
+            </span>
+        </div>
+
+    </div>
+
+
+    <script>
+        function home(){
+            window.location.href = 'http://localhost:3000/personal/index.html'
+        }
+        
+    </script>
+</body>
+</html>
