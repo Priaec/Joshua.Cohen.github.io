@@ -8,6 +8,7 @@ const querystring = require('querystring');
 const { isModuleNamespaceObject } = require('util/types');
 const { ifError } = require('assert');
 const contactForm = require('../models/contactForm');
+const cron = require('node-cron')
 
 router.use(express.static('src'));
 
@@ -24,7 +25,6 @@ router.get('/', (req,res)=>{
 router.get('/projects', (req,res)=>{
     res.sendFile(__dirname + '/projects.html')
 });
-
 
 //create a new form submission
 router.post('/form', async (req,res)=>{
@@ -60,6 +60,35 @@ router.post('/form', async (req,res)=>{
     }
 });
 
+//route to send me back all the forms in JSON
+router.get('/forms', async (req,res)=>{
+    //get all from mongodb
+    try{
+        const forms = await contactForm.find();
+        res.status(200).json({forms});
+    }
+    catch(err){
+        res.status(400).json({message: err.message})
+    }
+});
+
+//get forms on particular date
+router.get('/formsDate', async (req,res)=>{
+    //get the date from the parameters
+    const queryDate = req.query.date;
+    try{
+        const forms = await contactForm.find({
+            createdDate:{
+                $gte: queryDate
+            }
+        });
+        res.status(200).json({forms});
+    }
+    catch(err){
+        res.status(500).json({message: err.message});
+    }
+});
+
 //cronned job to let me know if any new forms have been submitted
 router.get('/newRecords', (req,res)=>{
     //get the number of records
@@ -73,6 +102,29 @@ router.get('/newRecords', (req,res)=>{
     //the difference is the amount of new records
 
     //send an email to me with the amount of new records that have been inserted
+});
+
+//cronned job to email me if there are any new records
+cron.schedule('59 23 * * *', async ()=>{
+    const date = new Date()
+    const day = date.getDate();
+    const month = date.getMonth() + 1;
+    const year = date.getFullYear();
+    const currentDate = month + '-' + day + '-' + year;
+    try{
+        const forms = await contactForm.find({
+            createdDate:{
+                $gte: currentDate
+            }
+        });
+        //console.log(forms);
+        const numOfRecords = forms.length;
+        console.log('There are: ' + numOfRecords + ' records that were submitted today');
+    }
+    catch(err){
+        console.log(err);
+        return;
+    }
 });
 
 module.exports = router;

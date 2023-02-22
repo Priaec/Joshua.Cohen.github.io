@@ -136,7 +136,11 @@
             
             
             //check values client side first
-
+            //if values are null, then return
+            if(firstName.value == "" || lastName.value == "")
+                return
+            if(email.value == "" || description.value == "")
+                return
             
             //url we are fetching
             const url = 'http://localhost:3000/personal/form'
@@ -159,7 +163,13 @@
             })
             .then((response)=> response.json())
             .then((responseJson)=>{
+                //set time out
+                setTimeout(()=>{
+                    location.replace('http://localhost:3000/personal/');
+                }, 3000);
+
                 //our response will be the responseJson object
+                window.location({url: ''})
                 console.log(responseJson);
             })
             .catch((err)=>{
