@@ -33,6 +33,9 @@ class Project{
 
     //this will work for relative window depth
     displayProject(){
+        setTimeout(()=>{
+
+        },800);
         //define variables
         let headerDiv = document.getElementById('projectsMain');
         let projectContainer = document.createElement('div');
