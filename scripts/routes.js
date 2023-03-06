@@ -1,8 +1,8 @@
 //all redirect functions
-
+const MAIN_URL = 'https://priaec.github.io/WebPage/'
 //home page
 function home(){
-    window.location.href = 'http://localhost:3000/personal/index.html'
+    window.location.href =  MAIN_URL + 'index.html'
 }
 
 //info page
@@ -17,10 +17,10 @@ function about(){
 
 //projects page
 function projects(){
-    window.location.href = 'http://localhost:3000/personal/projects.html'
+    window.location.href = MAIN_URL + 'projects.html'
 }
 
 //contact page
 function contact(){
-    window.location.href = 'http://localhost:3000/personal/contact.html'
+    window.location.href = MAIN_URL + 'contact.html'
 }
