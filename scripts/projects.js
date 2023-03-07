@@ -72,7 +72,7 @@ let projectss= [
         {
             name: "Face Recognition Deep Learning",
             description: "Currently working on application that learns to recognize one particular person. Emphasizes deep learning image processing using Convolutional Neural Networks. Expected to be fully functional by May 2023.",
-            image: "images/projects/FaceRecognition2.PNG"
+            image: "images/projects/FaceRecognition2.png"
         },
         {
             name: "BeFit Senior Design",
