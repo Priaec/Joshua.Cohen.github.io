@@ -2,7 +2,7 @@
     margin:0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'sans-serif';
 }
 
 body{
@@ -49,7 +49,6 @@ form{
 }
 
 h1{
-    font-size: 6em;
     color: rgb(0, 211, 162);
 }
 
@@ -175,14 +174,7 @@ h1{
     .header{
         width: 100%;
         height: 100vh;
-        background-image: url(../images/setupmodified.png);
-        background-position: center;
-        background-size: cover;
-    }
-
-    .otherHeader{
-        width: 100%;
-        height: 100vh;
+        background-image: url(images/setupmodified.png);
         background-position: center;
         background-size: cover;
     }
@@ -195,7 +187,7 @@ h1{
     }
 
     .logo{
-        width: 250px;         /*height: 500px; delete*/
+        width: 150px;
         margin: 20px 0;
         cursor: pointer;            
     }
@@ -262,40 +254,4 @@ h1{
 
     nav.sticky ul{
         width: auto;
-    }
-
-    /*Class to hold each project*/
-    div.projectContainer{
-        width: 90%;
-        border: 3px;
-        border-radius: 50px;
-        border-color: rgb(0, 211, 162);
-        border-style: solid;
-        display: flex;
-        flex: 1;
-        padding: 30px;
-        margin: auto;
-        margin-top: 30px;
-        margin-bottom: 30px;
-    }
-
-    /*Vertical flex*/
-    div.projectConatinerDesc{
-        margin: 5%;
-    }
-
-    #title{
-        text-align: center;
-    }
-
-    h2.name{
-        font-size: 50px;
-        color: rgb(6, 214, 160);
-    }
-    h4.description{
-        width: 70%;
-        padding: 4%;
-        font-size: 25px;
-        color: rgb(0, 163, 109);
-        text-indent: 10px;
     }

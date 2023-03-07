@@ -70,6 +70,11 @@ class Project{
 //define the project structure
 let projectss= [ 
         {
+            name: "Face Recognition Deep Learning",
+            description: "Currently working on application that learns to recognize one particular person. Emphasizes deep learning image processing using Convolutional Neural Networks. Expected to be fully functional by May 2023.",
+            image: "images/projects/FaceRecognition2.PNG"
+        },
+        {
             name: "BeFit Senior Design",
             description: "Created a native application for Android and Apple (iOS) with a team of 5. Users can track daily fitness metrics leveraging native Health APIs. Users can create individual accounts with user credentials. Ability to display individualized health metrics post login.",
             image : "images/projects/BeFitV3.JPG"
